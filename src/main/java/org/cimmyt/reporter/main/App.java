@@ -1,45 +1,20 @@
 package org.cimmyt.reporter.main;
 
-import java.util.Set;
+import static java.lang.System.out;
 
-import org.cimmyt.reporter.AbstractReporter;
-import org.cimmyt.reporter.ReporterFactory;
 import org.cimmyt.reporter.Reporter;
-
-
+import org.cimmyt.reporter.ReporterFactory;
 /**
  * Hello world!
  *
  */
-
 import org.cimmyt.reporter.exception.MissingReportException;
-import org.reflections.Reflections;
-
-import static java.lang.System.out;
 
 public class App 
 {
-	static{
-		try {
-			initializeReporterFactory();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static final void initializeReporterFactory() throws ClassNotFoundException{
-		Reflections reflections = new Reflections("org.cimmyt.reporter");
-		Set<Class<? extends AbstractReporter>> classes = reflections.getSubTypesOf(AbstractReporter.class);
-		for(Class<?> c : classes){
-			Class.forName(c.getName());
-		}
-		
-	}
-	
 	
     public static void main( String[] args )
     {
-        //ReportBuilder reportBuilder = new ReportBuilder();
     	ReporterFactory factory = ReporterFactory.instance();
 
 		try {

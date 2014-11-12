@@ -15,13 +15,15 @@ public interface Reporter {
 	Reporter createReporter();
 	
 	/**
-	 * Gets the unique key registered in ReportFactory
+	 * Gets the unique key associated to this reporter, and registered in ReportFactory
 	 * @return The key defining this reporter type.
 	 */
 	String getReportCode();
 	
-	
+
 	JRDataSource buildJRDataSource(Map<String,Object> args, Map<String,Object> jrParams);
+
 	Map<String, Object> buildJRParams(Map<String,Object> args);
+	
 	JasperPrint buildJRPrint(Map<String, Object> args) throws JRException;
 }
