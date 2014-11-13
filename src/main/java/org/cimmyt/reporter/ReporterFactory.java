@@ -61,7 +61,7 @@ public final class ReporterFactory {
 	 */
 	private void addReporter(Reporter report) {
 		if(reportersMap.containsKey(report.getReportCode()))
-			err.println("ReporterFactory: overwriting report with code: "+report.getReportCode());
+			err.println("WARNINIG - ReporterFactory: overwriting report with code: "+report.getReportCode());
 		
 		reportersMap.put(report.getReportCode(), report);
 	}

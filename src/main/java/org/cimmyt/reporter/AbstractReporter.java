@@ -1,13 +1,11 @@
 package org.cimmyt.reporter;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.query.JsonQueryExecuterFactory;
@@ -25,28 +23,28 @@ abstract class AbstractReporter implements Reporter{
 		return String.format("Report[%s : %s]", getReportCode(),this.getClass().getSimpleName());
 	}
 
-	public void exportToFile(Map<String, Object> args) throws JRException, IOException{
-		JasperPrint jrPrint = buildJRPrint(args);
-		JasperExportManager.exportReportToPdfFile(jrPrint, args.get("fileName").toString());		
-	}
-
 	public final JasperPrint buildJRPrint(Map<String, Object> args) throws JRException{
-		long start = System.currentTimeMillis();
-
-		String jasperFilesPath;
-		jasperFilesPath = "/jasper/"+args.get("templateName");
 		
-		Map<String, Object> jrParams = buildJRParams(args);
-		JRDataSource jrDataSource = buildJRDataSource(args, jrParams);
+		String jasperFilesPath = getTemplatePath();
+		Map<String, Object> jrParams = null;
+		JRDataSource jrDataSource = null;
+		
+		if(null != args){
+			jrParams = buildJRParams(args);
+			jrDataSource = buildJRDataSource(args.values());
+		}
 					
 		JasperPrint jrPrint = JasperFillManager.fillReport(jasperFilesPath, jrParams, jrDataSource);
 
-		System.err.println("Filling time : " + (System.currentTimeMillis() - start));
-		
 		return jrPrint;
 	}
 	
-	
+	/**
+	 * Returns a Map with the parameters required for creating a JasperPrint for this Reporter.
+	 * This method configures some basic jasper options like language and text formatting;
+	 * subclasses extending AbstractReporter may add extra parameters to fill in its particular template.
+	 * @return Map of parameters for a JarperPrint 
+	 */
 	public Map<String, Object> buildJRParams(Map<String,Object> args){
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -62,5 +60,19 @@ abstract class AbstractReporter implements Reporter{
 		return params;
 	}
 
+	/**
+	 * Obtains the full path to the .jasper file, specified by getFileName()
+	 * @param jasperFileName The name of the compiled .jasper file.
+	 * @return
+	 */
+	public String getTemplatePath() {
+		String jasperFileName = getTemplateName();
+	   	ClassLoader loader = AbstractReporter.class.getClassLoader();
+        
+	   	if(! jasperFileName.endsWith(".jasper"))
+        	jasperFileName = jasperFileName + ".jasper";
+
+        return loader.getResource(jasperFileName).getPath();
+	}
 
 }
