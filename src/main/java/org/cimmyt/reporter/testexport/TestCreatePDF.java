@@ -1,14 +1,20 @@
-package org.cimmyt.reporter;
+package org.cimmyt.reporter.testexport;
 
 import static java.lang.System.out;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
+import org.cimmyt.reporter.Reporter;
+import org.cimmyt.reporter.ReporterFactory;
 import org.cimmyt.reporter.exception.MissingReportException;
+import org.cimmyt.reporter.util.UtilFiller;
 
 public class TestCreatePDF{
 	
@@ -26,12 +32,16 @@ public class TestCreatePDF{
     
     public void createPDF() throws MissingReportException, JRException{
     	ReporterFactory factory = ReporterFactory.instance();
-    	Reporter rep22 = factory.createReporter("WFb22");
+    	Reporter rep = factory.createReporter("WFb23");
 		
 		long start = System.currentTimeMillis();
 
-		JasperPrint jrPrint = rep22.buildJRPrint(new HashMap<String, Object>());
-		JasperExportManager.exportReportToPdfFile(jrPrint, "target/Example.pdf");		
+		Map<String, Object> params = new HashMap<>();
+		params.put("locale",new Locale("en"));
+		params.put("dataSource", Arrays.asList(UtilFiller.getSingleOccData()));
+		
+		JasperPrint jrPrint = rep.buildJRPrint(params);
+		JasperExportManager.exportReportToPdfFile(jrPrint, "target/"+rep.getFileName()+".pdf");		
 
 		out.println("[Test PDF file generated] time(ms): " + (System.currentTimeMillis() - start));
 		

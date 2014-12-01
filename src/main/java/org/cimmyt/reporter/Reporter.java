@@ -50,4 +50,18 @@ public interface Reporter {
 	 * @return
 	 */
 	String getTemplateName();
+	
+	/**
+	 * Defines the expression for the file name generated for this Reporter.
+	 *
+	 * @param fileNameExpr the name expression.
+	 */
+	void setFileNameExpression(String fileNameExpr);
+
+	/**
+	 * Creates a file name for the specified reporter by using the report name string
+	 * @return the constructed file name
+	 */
+	String getFileName();
+
 }

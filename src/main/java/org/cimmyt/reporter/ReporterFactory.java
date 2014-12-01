@@ -2,6 +2,8 @@ package org.cimmyt.reporter;
 
 import static java.lang.System.err;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -28,14 +30,15 @@ public final class ReporterFactory {
 	 * @throws ClassNotFoundException
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
 	 */
-	private static void initFactory() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+	private static void initFactory() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException{
 		Reflections reflections = new Reflections("org.cimmyt.reporter");
 		Set<Class<? extends AbstractReporter>> classes = reflections.getSubTypesOf(AbstractReporter.class);
 		for(Class<?> c : classes){
 			Class<?> r = Class.forName(c.getName());
 			Reporter instance = (Reporter)r.newInstance();
-			
 			ReporterFactory.instance().addReporter(instance);
 		}
 		
@@ -74,6 +77,8 @@ public final class ReporterFactory {
 	 */
 	public Reporter createReporter(String reportKey) throws MissingReportException{
 		if(reportersMap.containsKey(reportKey))
+			
+			
 			return reportersMap.get(reportKey).createReporter();
 		
 		throw new MissingReportException(reportKey);
