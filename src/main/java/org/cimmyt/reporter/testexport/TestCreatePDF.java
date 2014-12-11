@@ -32,13 +32,15 @@ public class TestCreatePDF{
     
     public void createPDF() throws MissingReportException, JRException{
     	ReporterFactory factory = ReporterFactory.instance();
-    	Reporter rep = factory.createReporter("WFb23");
+    	Reporter rep = factory.createReporter("WFb61");
 		
 		long start = System.currentTimeMillis();
 
 		Map<String, Object> params = new HashMap<>();
 		params.put("locale",new Locale("en"));
-		params.put("dataSource", Arrays.asList(UtilFiller.getSingleOccData()));
+
+//		params.put("dataSource", Arrays.asList(UtilFiller.getSingleOccData()));
+		params.put("dataSource", Arrays.asList(UtilFiller.getMultiOccData()));
 		
 		JasperPrint jrPrint = rep.buildJRPrint(params);
 		JasperExportManager.exportReportToPdfFile(jrPrint, "target/"+rep.getFileName()+".pdf");		

@@ -9,24 +9,24 @@ import org.cimmyt.reporter.domain.Occurrence;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-public class WFieldbook24 extends AbstractReporter{
+public class WFieldbook25 extends AbstractReporter{
 
 	@Override
 	public Reporter createReporter() {
-		Reporter r = new WFieldbook24();
-		r.setFileNameExpression(this.getReportCode()+"_{trial_name}_{occ}");
+		Reporter r = new WFieldbook25();
+		r.setFileNameExpression("NationalSegregating_Nur:{tid}");
 		
 		return r;
 	}
 
 	@Override
 	public String getReportCode() {
-		return "WFb24";
+		return "WFb25";
 	}
 
 	@Override
 	public String getTemplateName() {
-		return "WFb24_header.jasper";
+		return "WFb25_header.jasper";
 	}
 
 	@Override

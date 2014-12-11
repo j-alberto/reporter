@@ -30,7 +30,7 @@ public class GermplasmEntry {
 	private String m_cycle;
 	private Integer f_sid;
 	private String f_cross_name ="f-cross/name";
-	private String crossname;
+	private String crossname = "dummy//Cross/Name";
 	private Integer s_tid;
 	private Integer s_trial_offset;
 	private Integer m_tid;
@@ -65,8 +65,21 @@ public class GermplasmEntry {
 	private Integer s_occ_offset;
 	private Integer f_gid;
 	private String type;
-	
-	//not used
+	private String linea1;
+	private String linea2;
+	private String linea3;
+	private String linea4;
+	private String linea5;
+	private Integer rep;
+	private String s_tabbr2;
+	private Integer plot1;
+	private Integer plot2;
+	private Integer plot3;
+	private Integer plot4;
+	private String slocycle2;
+	private String s_ent2;
+	private String ischeck;
+	private Integer sinoffset;
 
 	public String getF_cross_name() {
 		return f_cross_name;
@@ -415,5 +428,95 @@ public class GermplasmEntry {
 	}
 	public void setS_occ(Integer s_occ) {
 		this.s_occ = s_occ;
+	}
+	public String getLinea1() {
+		return linea1;
+	}
+	public void setLinea1(String linea1) {
+		this.linea1 = linea1;
+	}
+	public Integer getRep() {
+		return rep;
+	}
+	public void setRep(Integer rep) {
+		this.rep = rep;
+	}
+	public String getS_tabbr2() {
+		return s_tabbr2;
+	}
+	public void setS_tabbr2(String s_tabbr2) {
+		this.s_tabbr2 = s_tabbr2;
+	}
+	public String getLinea3() {
+		return linea3;
+	}
+	public void setLinea3(String linea3) {
+		this.linea3 = linea3;
+	}
+	public Integer getPlot1() {
+		return plot1;
+	}
+	public void setPlot1(Integer plot1) {
+		this.plot1 = plot1;
+	}
+	public Integer getPlot3() {
+		return plot3;
+	}
+	public void setPlot3(Integer plot3) {
+		this.plot3 = plot3;
+	}
+	public Integer getPlot4() {
+		return plot4;
+	}
+	public void setPlot4(Integer plot4) {
+		this.plot4 = plot4;
+	}
+	public Integer getPlot2() {
+		return plot2;
+	}
+	public void setPlot2(Integer plot2) {
+		this.plot2 = plot2;
+	}
+	public String getSlocycle2() {
+		return slocycle2;
+	}
+	public void setSlocycle2(String slocycle2) {
+		this.slocycle2 = slocycle2;
+	}
+	public String getS_ent2() {
+		return s_ent2;
+	}
+	public void setS_ent2(String s_ent2) {
+		this.s_ent2 = s_ent2;
+	}
+	public String getLinea2() {
+		return linea2;
+	}
+	public void setLinea2(String linea2) {
+		this.linea2 = linea2;
+	}
+	public String getIscheck() {
+		return ischeck;
+	}
+	public void setIscheck(String ischeck) {
+		this.ischeck = ischeck;
+	}
+	public String getLinea4() {
+		return linea4;
+	}
+	public void setLinea4(String linea4) {
+		this.linea4 = linea4;
+	}
+	public Integer getSinoffset() {
+		return sinoffset;
+	}
+	public void setSinoffset(Integer sinoffset) {
+		this.sinoffset = sinoffset;
+	}
+	public String getLinea5() {
+		return linea5;
+	}
+	public void setLinea5(String linea5) {
+		this.linea5 = linea5;
 	}
 }

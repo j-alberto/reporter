@@ -2,6 +2,19 @@
 
 <fontFamilies>
 
+	<fontFamily name="Courier New">
+		<normal>fonts/cour.ttf</normal>
+		<bold>fonts/courbd.ttf</bold>
+		<italic>fonts/couri.ttf</italic>
+		<boldItalic>fonts/courbi.ttf</boldItalic>
+		<pdfEncoding>Identity-H</pdfEncoding>
+		<pdfEmbedded>true</pdfEmbedded>
+		<exportFonts>
+			<export key="net.sf.jasperreports.html">'Courier New', Courier</export>
+			<export key="net.sf.jasperreports.xhtml">'Courier New', Courier</export>
+		</exportFonts>
+	</fontFamily>
+
 	<fontFamily name="Times New Roman">
 		<normal>fonts/times.ttf</normal>
 		<bold>fonts/timesbd.ttf</bold>
@@ -89,8 +102,8 @@
 	</fontFamily>
 	<fontFamily name="Monospaced">
 		<exportFonts>
-			<export key="net.sf.jasperreports.html">'DejaVu Sans Mono', 'Courier New', Courier, monospace</export>
-			<export key="net.sf.jasperreports.xhtml">'DejaVu Sans Mono', 'Courier New', Courier, monospace</export>
+			<export key="net.sf.jasperreports.html">'DejaVu Sans Mono', monospace</export>
+			<export key="net.sf.jasperreports.xhtml">'DejaVu Sans Mono', monospace</export>
 		</exportFonts>
 	</fontFamily>
 

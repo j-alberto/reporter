@@ -61,12 +61,12 @@ public class WFieldbook22Test{
 
 	@Test
 	public void testGetTemplateName() {
-		assertTrue(testInstance.getTemplateName().contains("Example"));
+		assertTrue(testInstance.getTemplateName().contains("WFb22_header"));
 	}
 
 	@Test
 	public void testGetPathName(){
-		assertTrue(testInstance.getTemplatePath().endsWith("/Example.jasper"));
+		assertTrue(testInstance.getTemplatePath().endsWith("/WFb22_header.jasper"));
 	}
 
 
@@ -77,12 +77,12 @@ public class WFieldbook22Test{
 	
 	@Test
 	public void testBuildJRParams1() {
-		assertNotNull(testInstance.buildJRParams(mockMap).get("ReportTitle"));		
+		assertNotNull(testInstance.buildJRParams(mockMap).get("tid"));		
 	}
 
 	@Test
 	public void testBuildJRParams2() {
-		assertNotNull(testInstance.buildJRParams(mockMap).get("ReportCaption"));
+		assertNotNull(testInstance.buildJRParams(mockMap).get("occ"));
 	}
 
 }

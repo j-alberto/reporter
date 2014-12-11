@@ -87,30 +87,16 @@ abstract class AbstractReporter implements Reporter{
 	 * @return
 	 */
 	public String getTemplatePath() {
+		String baseJasperDirectory = "jasper/";
 		String jasperFileName = getTemplateName();
 	   	ClassLoader loader = AbstractReporter.class.getClassLoader();
         
 	   	if(! jasperFileName.endsWith(".jasper"))
         	jasperFileName = jasperFileName + ".jasper";
 
-        return loader.getResource(jasperFileName).getPath();
+        return loader.getResource(baseJasperDirectory+jasperFileName).getPath();
 	}
 
-	/**
-	 * Defines the expression for the file name generated for this Reporter.
-	 * Examples of file name expressions and possible outputs (depending on output file format):
-	 * <pre>
-	 *   report1: report1.pdf / report1.xls / report1.txt
-	 *   fieldbook14: fieldbook14.pdf / fieldbook14.xls / fieldbook14.txt
-	 *   CB-{trialId}: CB-25644.pdf / CB-889211.xls / CB-112.txt
-	 *   Summer-{trialAbbr}_{cycle}: Summer-Obr_2014A.pdf / Summer-BW-14A.xls / Summer-Nur1_14B.xls
-	 * </pre> 
-	 * Parameters can be passed in expressions, and they will be replaced for the value of such parameter, 
-	 * defined in the Map returned from buildJRParams() method. If no parameter is found, it is just omitted.
-	 *
-	 * @param fileNameExpr the name expression. The default is {reportCode}-{tid}, where {reportCode} is the code of a concrete subclass,
-	 * and {tid} is a parameter in the parameters Map passed to the JRPrint, ignored if not found.
-	 */
 	public void setFileNameExpression(String fileNameExpr){
 		this.fileNameExpr = fileNameExpr;
 	}

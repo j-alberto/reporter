@@ -9,24 +9,23 @@ import org.cimmyt.reporter.domain.Occurrence;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-public class WFieldbook24 extends AbstractReporter{
+public class WFieldbook28 extends AbstractReporter{
 
 	@Override
 	public Reporter createReporter() {
-		Reporter r = new WFieldbook24();
-		r.setFileNameExpression(this.getReportCode()+"_{trial_name}_{occ}");
-		
+		Reporter r = new WFieldbook28();
+		r.setFileNameExpression("Rnd_Nal_{tid}");
 		return r;
 	}
 
 	@Override
 	public String getReportCode() {
-		return "WFb24";
+		return "WFb28";
 	}
 
 	@Override
 	public String getTemplateName() {
-		return "WFb24_header.jasper";
+		return "WFb28_header.jasper";
 	}
 
 	@Override
@@ -58,21 +57,10 @@ public class WFieldbook24 extends AbstractReporter{
 				occ.setOcc(777);
 				
 				for(GermplasmEntry e : occ.getEntriesList2()){
-//					e.setS_ent(11);
-//					e.setEntryNum(22);
-//					e.setS_tabbr("dummy_t_abbr");
-//					e.setSlocycle("dummy_sloCycle");
-//					e.setLinea1("linea1");
-//					e.setLinea2("linea2");
-//					e.setLinea3("linea3");
-//					e.setLinea4("linea4");
-//					e.setLinea5("linea5");
+
 				}
 			}
-			
-//			for(GermplasmEntry ge : oc.getEntriesList()){
-//
-//			}
+
 		}
 		
 		JRDataSource dataSource = new JRBeanCollectionDataSource(args);

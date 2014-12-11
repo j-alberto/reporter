@@ -3,13 +3,17 @@ package org.cimmyt.reporter.domain;
 import java.util.List;
 
 public class Occurrence {
+		public Occurrence(){	}
+		public Occurrence(Integer occ){
+			this.occ = occ;
+		}
 
 	private String station_id;
 	private String lid;
 	private List<GermplasmEntry> entriesList;
 	private String occ_cycle;
 	private Integer offset;
-	private String occ;
+	private Integer occ;
 	private String harvDate;
 	private String station;
 	private String occ_abbr;
@@ -208,10 +212,10 @@ public class Occurrence {
 	public void setOcc_cycle(String occ_cycle) {
 		this.occ_cycle = occ_cycle;
 	}
-	public String getOcc() {
+	public Integer getOcc() {
 		return occ;
 	}
-	public void setOcc(String occ) {
+	public void setOcc(Integer occ) {
 		this.occ = occ;
 	}
 	public String getHarvDate() {

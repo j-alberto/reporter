@@ -24,11 +24,10 @@ public class UtilFiller {
 		);
 		
 		List<Occurrence> occs = Arrays.asList(
-				new Occurrence(),
-				new Occurrence(),
-				new Occurrence(),
-				new Occurrence(),
-				new Occurrence()
+				new Occurrence(11),
+				new Occurrence(22),
+				new Occurrence(33),
+				new Occurrence(44)
 		);
 		
 		occ1.setOcurrencesList(occ);
@@ -59,13 +58,29 @@ public class UtilFiller {
 				new GermplasmEntry(22),
 				new GermplasmEntry(23)
 		);
+		
+		for(GermplasmEntry e : entries){
+			e.setS_ent(11);
+//			e.setEntryNum(22);
+			e.setS_tabbr("dummy_t_abbr");
+			e.setSlocycle("_sloCycle");
+			e.setLinea1("lineaA");
+			e.setLinea2("lineaB");
+			e.setLinea3("lineaC");
+			e.setLinea4("lineaD");
+			e.setLinea5("lineaE");
+			e.setCode28("123");
+			e.setIntrid("999");
+			e.setPlot(e.getEntryNum());
+		}
 
 		for(Occurrence o : occ1.getOcurrencesList()){
 			o.setEntriesList2(entries);
 		}
 		
 		for(Occurrence o : occ2.getOcurrencesList()){
-			o.setEntriesList2(entries);
+			o.setEntriesList2(entries); //report 23
+			o.setEntriesList(entries); //report 22
 		}
 		
 		occ1.setOrganization("my organization");
