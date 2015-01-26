@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jasper.version>5.5.0</jasper.version>
+		<jasper.version>6.0.0</jasper.version>
 		<itext.version>2.1.7</itext.version>
 		<junit.version>4.11</junit.version>
 		<reflections.version>0.9.9</reflections.version>
