@@ -4,6 +4,7 @@ import static java.lang.System.err;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -36,10 +37,18 @@ public final class ReporterFactory {
 	private static void initFactory() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException{
 		Reflections reflections = new Reflections("org.cimmyt.reporter");
 		Set<Class<? extends AbstractReporter>> classes = reflections.getSubTypesOf(AbstractReporter.class);
+		
+		
 		for(Class<?> c : classes){
-			Class<?> r = Class.forName(c.getName());
-			Reporter instance = (Reporter)r.newInstance();
-			ReporterFactory.instance().addReporter(instance);
+			System.out.print("CLASS: "+c.getName());
+			
+			int classModifiers = c.getModifiers();
+			System.out.println(" modif: "+Modifier.toString(classModifiers));
+			if(! Modifier.toString(classModifiers).contains("abstract")){
+				Class<?> r = Class.forName(c.getName());
+				Reporter instance = (Reporter)r.newInstance();
+				ReporterFactory.instance().addReporter(instance);
+			}
 		}
 		
 	}

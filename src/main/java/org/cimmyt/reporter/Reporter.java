@@ -1,7 +1,10 @@
 package org.cimmyt.reporter;
 
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Map;
+
+import org.cimmyt.reporter.exception.BuildReportException;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -74,5 +77,11 @@ public interface Reporter {
 	 * @return the constructed file name
 	 */
 	String getFileName();
+	
+	/**
+	 * Sends the file to the specified output stream
+	 * @param output Out where the report has to be sent. This can be a servlet, file or any other output stream.
+	 */
+	void asOutputStream(OutputStream output) throws BuildReportException;
 
 }

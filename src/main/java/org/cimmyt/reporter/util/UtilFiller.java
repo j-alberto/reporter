@@ -1,10 +1,13 @@
 package org.cimmyt.reporter.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.cimmyt.reporter.domain.GermplasmEntry;
 import org.cimmyt.reporter.domain.Occurrence;
+import org.cimmyt.reporter.domain.Site;
+import org.cimmyt.reporter.domain.SiteEntry;
 
 public class UtilFiller {
 
@@ -72,6 +75,15 @@ public class UtilFiller {
 			e.setCode28("123");
 			e.setIntrid("999");
 			e.setPlot(e.getEntryNum());
+			
+			e.setF_lid(123);
+			e.setF_cycle("F_14A");
+			e.setF_tabbr("F_tabbr");
+			e.setF_ent(1579);
+			e.setM_lid(456);
+			e.setM_cycle("M_14B");
+			e.setM_tabbr("M_tabbr");
+			e.setM_ent(2579);
 		}
 
 		for(Occurrence o : occ1.getOcurrencesList()){
@@ -95,6 +107,54 @@ public class UtilFiller {
 	}
 	public static Occurrence getMultiOccData(){
 		return occ2;
+	}
+	
+	public static Site getOneSite(){
+		Site site = new Site();
+		
+		site.setSite("dummy site");
+		site.setNursery("a nursery name");
+		site.setSeason("a season 2015");
+		site.setSeedPrep("5");
+		site.setSiteNum("2");
+		
+		SiteEntry se;
+		List<SiteEntry> entries = new ArrayList<>();
+		
+		for(int i = 1; i<=100; i++){
+			se = new SiteEntry();
+			
+			se.setReplicate(i%50);
+			se.setBlock(i%25);
+			se.setPlot(i);
+			se.setEntry(101-i);
+			se.setStockId("aSTOCK_ID");
+			se.setName("a name");
+			se.setPedigree("a.pedigreeXXXXXXXXXXXXYXXXXYXXXX-b-b-b-0");
+			se.setOrigin("dummy origin");
+			
+			se.setSeedsPerPack("999");
+			se.setMemo("some memo xxxxxxxxxxxxxxx");
+			se.setSeedQty("999");
+			
+			se.setFloweringM("floweringM");
+			se.setFloweringM("floweringF");
+			se.setHeightPlant("999");
+			se.setHeightEar("999");
+			se.setLodging("999");
+			se.setNumPlants("999");
+			se.setNumEars("999");
+			se.setFieldWeight("999");
+			se.setGrainWeight("999");
+			se.setGrainMoisture("999");
+
+			
+			entries.add(se);
+		}
+		
+		site.setEntries(entries);
+		
+		return site;
 	}
 	
 }

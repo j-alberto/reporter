@@ -6,13 +6,23 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.OutputStream;
+
+import org.cimmyt.reporter.exception.BuildReportException;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.query.JsonQueryExecuterFactory;
+import net.sf.jasperreports.engine.xml.JasperDesignFactory;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 /**
  * Defines the base class for all Reporters. Each reporter pretending to
@@ -25,6 +35,7 @@ abstract class AbstractReporter implements Reporter{
 	private String fileNameExpr = getReportCode()+"-{tid}";
 	private String fileName = null;
 	private Pattern fileNameParamsPattern = Pattern.compile("\\{[\\w-_]*\\}");
+	JasperPrint jrPrint;
 	
 	@Override
 	public String toString(){
@@ -34,7 +45,7 @@ abstract class AbstractReporter implements Reporter{
 	/**
 	 * Uses the data passed to build a JasperPrint, which can be used to generate a file, an outputStream or any other format for distribution.
 	 */
-	public final JasperPrint buildJRPrint(Map<String, Object> args) throws JRException{
+	public JasperPrint buildJRPrint(Map<String, Object> args) throws JRException{
 		
 		String jasperFilesPath = getTemplatePath();
 		Map<String, Object> jrParams = null;
@@ -44,14 +55,17 @@ abstract class AbstractReporter implements Reporter{
 			jrParams = buildJRParams(args);
 			fileName = buildOutputFileName(jrParams);
 
-			if(args.containsKey("dataSource"))
+			if(args.containsKey("dataSource")){
 				jrDataSource = buildJRDataSource((Collection<?>)args.get("dataSource"));
+				System.out.println ("datasource done!!!");
+			}
 			
 		}
 					
-		JasperPrint jrPrint = JasperFillManager.fillReport(jasperFilesPath, jrParams, jrDataSource);
+		jrPrint = JasperFillManager.fillReport(jasperFilesPath, jrParams, jrDataSource);
 
 		return jrPrint;
+		
 	}
 	
 	/**
@@ -108,8 +122,11 @@ abstract class AbstractReporter implements Reporter{
 	public String getFileName(){
 		return fileName;
 	}
+	public void setFileName(String fileName){
+		this.fileName = fileName;
+	}
 	
-	private String buildOutputFileName(Map<String,Object> jrParams){
+	protected String buildOutputFileName(Map<String,Object> jrParams){
 		String fileName = this.fileNameExpr;
 		
 		
@@ -127,5 +144,31 @@ abstract class AbstractReporter implements Reporter{
 		
 		return fileName;
 	}
+	
+	@Override
+	public void asOutputStream(OutputStream output) throws BuildReportException {
+		if(null != jrPrint)
+			try {
+				JasperExportManager.exportReportToPdfStream(jrPrint, output);
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+		else throw new BuildReportException(getReportCode());
+	}
 
+	/**
+	 * Does not set the input and output of this exporter, only configures it.
+	 * @return
+	 */
+	protected JRXlsxExporter createDefaultExcelExporter(){
+		JRXlsxExporter ex = new JRXlsxExporter();
+		
+		SimpleXlsReportConfiguration jrConfig = new SimpleXlsReportConfiguration();
+		jrConfig.setOnePagePerSheet(false);
+		jrConfig.setDetectCellType(true);
+		jrConfig.setIgnoreCellBorder(true);
+		jrConfig.setWhitePageBackground(true);
+		
+		return ex;
+	}
 }

@@ -70,6 +70,11 @@ public class GermplasmEntry {
 	private String linea3;
 	private String linea4;
 	private String linea5;
+	private String linea1m;
+	private String linea2m;
+	private String linea3m;
+	private String linea4m;
+	private String linea5m;
 	private Integer rep;
 	private String s_tabbr2;
 	private Integer plot1;
@@ -518,5 +523,35 @@ public class GermplasmEntry {
 	}
 	public void setLinea5(String linea5) {
 		this.linea5 = linea5;
+	}
+	public String getLinea2m() {
+		return linea2m;
+	}
+	public void setLinea2m(String linea2m) {
+		this.linea2m = linea2m;
+	}
+	public String getLinea3m() {
+		return linea3m;
+	}
+	public void setLinea3m(String linea3m) {
+		this.linea3m = linea3m;
+	}
+	public String getLinea4m() {
+		return linea4m;
+	}
+	public void setLinea4m(String linea4m) {
+		this.linea4m = linea4m;
+	}
+	public String getLinea5m() {
+		return linea5m;
+	}
+	public void setLinea5m(String linea5m) {
+		this.linea5m = linea5m;
+	}
+	public String getLinea1m() {
+		return linea1m;
+	}
+	public void setLinea1m(String linea1m) {
+		this.linea1m = linea1m;
 	}
 }
